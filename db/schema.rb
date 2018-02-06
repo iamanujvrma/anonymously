@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20180317062650) do
     t.datetime "updated_at", null: false
     t.integer "receiver_id"
     t.text "content"
-    t.integer "is_liked"
-    t.integer "is_unlocked"
-    t.integer "is_read"
+    t.integer "is_liked", default: 0
+    t.integer "is_unlocked", default: 0
+    t.integer "is_read", default: 0
   end
 
   create_table "users", force: :cascade do |t|
