@@ -10,6 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180206094718) do
+
+  create_table "messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "receiver_id"
+    t.text "content"
+    t.integer "is_liked"
+    t.integer "is_unlocked"
+    t.integer "is_read"
+  end
 
 end
