@@ -1,4 +1,3 @@
-
 require 'rails_helper'
 
 RSpec.describe User do
@@ -30,6 +29,23 @@ RSpec.describe User do
     	expect(user4.errors['name']).to eq(["is too long (maximum is 20 characters)"])
     end
 	
+  end
+
+
+  context 'check validity of gender' do
+
+  	let(:user1) { build(:user, gender: 'female') }
+    let(:user2) { build(:user, gender: 'none') }
+
+    it 'validates correct gender ' do
+      expect(user1.valid?).to eq(true)
+    end
+
+    it 'validates invalid gender ' do
+      expect(user2.valid?).to eq(false)
+      expect(user1.errors['gender']).to eq(["Invalid gender"])
+    end    
+
   end
 
 end

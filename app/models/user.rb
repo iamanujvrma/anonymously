@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :gender , presence: true 
-	validates_inclusion_of :gender, :in => ['Male','male','Female','female']
+	validates_inclusion_of :gender, :in => ['Male','male','Female','female'], message: 'Invalid gender'
 
 
   validates :name, presence: true,
