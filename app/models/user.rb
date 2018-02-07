@@ -4,12 +4,17 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  validates :gender , presence: true 
+	validates_inclusion_of :gender, :in => ['Male','male','Female','female'], message: 'Invalid gender'
+
+
   validates :name, presence: true,
-    length: { minimum: 2, maximum: 20 },
-    format: {
-      with: /\A[A-Za-z][A-Za-z0-9]*\s*_*[A-Za-z0-9]*/,
-      message: "name cannot start with a number or underscore"
-    }
+                   length: { minimum: 2, maximum: 20 },
+	                 format: {
+	                 	 with: /\A[A-Za-z][A-Za-z0-9]*\s*_*[A-Za-z0-9]*/,
+	                   message: "name cannot start with a number or underscore"
+	                 }
+
   validates :date_of_birth, presence: true
   validate :valid_dob?
 
@@ -29,4 +34,5 @@ class User < ApplicationRecord
     errors.add(:date_of_birth, "Is an invalid date.")
     false
   end
+
 end
