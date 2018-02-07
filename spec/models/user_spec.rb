@@ -11,11 +11,13 @@ RSpec.describe User do
     let(:user5) {build(:user, name: 'pinky rout')}
 
     it 'validates name with only alphabets'  do
+    	#expect(user5.errors).to eq([])
     	expect(user5.valid?).to eq(true)
     end
 
     it 'validates name starting with a number' do
       expect(user1.valid?).to eq(false)
+      #expect(user1.errors).to eq([])
       expect(user1.errors['name']).to eq(["name cannot start with a number or underscore"])
     end
 

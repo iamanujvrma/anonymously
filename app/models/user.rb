@@ -5,9 +5,9 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :name, presence: true,
-    length: { minimum: 2, maximum: 20 },
-    format: {
-      with: /\A[A-Za-z][A-Za-z0-9]*\s*_*[A-Za-z0-9]*/,
+                   length: { minimum: 2, maximum: 20 },
+                   format: {
+       with: /\A[A-Za-z][A-Za-z0-9]*\s*_*[A-Za-z0-9]*/,
       message: "name cannot start with a number or underscore"
     }
   validates :date_of_birth, presence: true
@@ -16,7 +16,7 @@ class User < ApplicationRecord
   private
   def valid_dob?
     if valid_date?
-      unless date_of_birth.future?
+      if date_of_birth.future?
         errors.add(:date_of_birth, "Date of Birth cannot be in future.")
       end
     end
