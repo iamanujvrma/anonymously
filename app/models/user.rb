@@ -10,10 +10,11 @@ class User < ApplicationRecord
 
   validates :name, presence: true,
                    length: { minimum: 2, maximum: 20 },
-	                 format: {
-	                 	 with: /\A[A-Za-z][A-Za-z0-9]*\s*_*[A-Za-z0-9]*/,
-	                   message: "name cannot start with a number or underscore"
-	                 }
+                   format: {
+                            with: /\A[A-Za-z][A-Za-z0-9]*\s*_*[A-Za-z0-9]*/,
+                            message: "name cannot start with a number or underscore"
+                           }
+ 
 
   validates :date_of_birth, presence: true
   validate :valid_dob?
@@ -34,5 +35,9 @@ class User < ApplicationRecord
     errors.add(:date_of_birth, "Is an invalid date.")
     false
   end
+<<<<<<< HEAD
+end
+=======
 
 end
+>>>>>>> c33eed8eea418f2711195c4137b5b37b8af9a384
