@@ -35,9 +35,5 @@ class User < ApplicationRecord
     errors.add(:date_of_birth, "Is an invalid date.")
     false
   end
-<<<<<<< HEAD
-end
-=======
 
 end
->>>>>>> c33eed8eea418f2711195c4137b5b37b8af9a384
