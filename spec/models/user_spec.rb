@@ -11,7 +11,7 @@ RSpec.describe User do
     let(:user5) {build(:user, name: 'pinky rout')}
 
     it 'validates name with only alphabets'  do
-    	expect(user5.valid?).to eq(true)
+      expect(user5.valid?).to eq(true)
     end
 
     it 'validates name starting with a number' do

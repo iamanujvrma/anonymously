@@ -21,7 +21,7 @@ class User < ApplicationRecord
   private
   def valid_dob?
     if valid_date?
-      unless date_of_birth.future?
+      if date_of_birth.future?
         errors.add(:date_of_birth, "Date of Birth cannot be in future.")
       end
     end
