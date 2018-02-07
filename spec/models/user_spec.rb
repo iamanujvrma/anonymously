@@ -8,6 +8,11 @@ RSpec.describe User do
     let(:user2) { build(:user, name: '_pinky') }
     let(:user3) { build(:user, name: 'p') }
     let(:user4) { build(:user, name: 'pinkyroutbv egbs brejgbjbjkg bnjmsbnsjgrtkhb grejhgb') }
+    let(:user5) {build(:user, name: 'pinky rout')}
+
+    it 'validates name with only alphabets'  do
+    	expect(user5.valid?).to eq(true)
+    end
 
     it 'validates name starting with a number' do
       expect(user1.valid?).to eq(false)
