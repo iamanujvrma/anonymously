@@ -5,7 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, presence: true,
-                   uniqueness: true,
                    length: { minimum: 2, maximum: 20 },
 	                 format: {
 	                 	 with: /\A[A-Za-z][A-Za-z0-9]*\s*_*[A-Za-z0-9]*/,

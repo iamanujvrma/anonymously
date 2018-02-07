@@ -4,20 +4,10 @@ RSpec.describe User do
 	 
 	context 'check validity of name' do
 
-		let(:user)  { build(:user, name: 'pinky rout') }
     let(:user1) { build(:user, name: '12pinky') }
     let(:user2) { build(:user, name: '_pinky') }
     let(:user3) { build(:user, name: 'p') }
     let(:user4) { build(:user, name: 'pinkyroutbv egbs brejgbjbjkg bnjmsbnsjgrtkhb grejhgb') }
-    let(:user5) { build(:user, name: 'pinkyrout') }
-		
-		it 'validates name with only alphabets' do
-	  expect(user.valid?).to eq(true)
-	  end
-
-    it 'validates name with only alphabets' do
-      expect(user.valid?).to eq(true)
-    end
 
     it 'validates name starting with a number' do
       expect(user1.valid?).to eq(false)
@@ -30,19 +20,14 @@ RSpec.describe User do
     end
     
     it 'validates name with length less than 2'  do
-    	expect(user2.valid?).to eq(false)
-    	expect(user2.errors['name']).to eq([""])
+    	expect(user3.valid?).to eq(false)
+    	expect(user3.errors['name']).to eq(["is too short (minimum is 2 characters)"])
     end
     
     it 'validates name with length more than 20' do
-    	expect(user3.valid?).to eq(false)
-    	expect(user3.errors['name']).to eq([""])
+    	expect(user4.valid?).to eq(false)
+    	expect(user4.errors['name']).to eq(["is too long (maximum is 20 characters)"])
     end
-      
-    it 'valiadtes dublicate name' do 
-      expect(user4.valid?).to eq(false)
-      expect(user4.errors['name'].to eq([""]))
-    end   	
 	
   end
 
