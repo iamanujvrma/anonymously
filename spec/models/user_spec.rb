@@ -8,6 +8,11 @@ RSpec.describe User do
     let(:user2) { build(:user, name: '_pinky') }
     let(:user3) { build(:user, name: 'p') }
     let(:user4) { build(:user, name: 'pinkyroutbv egbs brejgbjbjkg bnjmsbnsjgrtkhb grejhgb') }
+    let(:user5) {build(:user, name: 'pinky rout')}
+
+    it 'validates name with only alphabets'  do
+    	expect(user5.valid?).to eq(true)
+    end
 
     it 'validates name starting with a number' do
       expect(user1.valid?).to eq(false)
@@ -31,22 +36,20 @@ RSpec.describe User do
 	
   end
 
-
   context 'check validity of gender' do
 
   	let(:user1) { build(:user, gender: 'female') }
     let(:user2) { build(:user, gender: 'none') }
 
     it 'validates correct gender ' do
-      expect(user1.valid?).to eq(true)
+      expect(user1.errors['gender']).to eq([])
     end
 
     it 'validates invalid gender ' do
       expect(user2.valid?).to eq(false)
-      expect(user1.errors['gender']).to eq(["Invalid gender"])
+      expect(user2.errors['gender']).to eq(["Invalid gender"])
     end    
 
   end
-
 end
 	
