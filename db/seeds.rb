@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 10.times do 
-	User.create do |user| 
-		user.name = Faker::Name.name
-		user.gender = 'Male'
-		user.email = Faker::Internet.email
-		user.date_of_birth =  Faker::Date.birthday
-		user.password =	 'pass1234'
-	end
+  User.create do |user| 
+    user.name = Faker::Name.name
+    user.gender = 'Male'
+    user.email = Faker::Internet.email
+    user.date_of_birth =  Faker::Date.birthday
+    user.password =	 Faker::Internet.password
+  end
 end
