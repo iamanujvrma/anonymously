@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :message do
-	  trait :message_present do
-		  content 'This is a Message Text'
+    trait :message_present do
+      content 'This is a Message Text'
     end
 
-		trait :message_empty do
+    trait :message_empty do
       content nil
     end
 
