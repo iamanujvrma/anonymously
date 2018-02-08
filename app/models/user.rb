@@ -18,6 +18,8 @@ class User < ApplicationRecord
 
   validates :date_of_birth, presence: true
   validate :valid_dob?
+  
+  has_many :messages
 
   private
   def valid_dob?
