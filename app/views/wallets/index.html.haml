@@ -1,0 +1,13 @@
+%h1 Wallet
+%table{:align => "center", :border => "10"}
+  %th Wallet Id
+  %th Points
+  - @wallets.each do |wallet|
+    %tr
+      %td
+        = wallet.id
+      %td
+        = wallet.points
+    %tr
+%h2= link_to 'See histories', wallet_histories_path
+%h3= #link_to 'User Profile', users_path

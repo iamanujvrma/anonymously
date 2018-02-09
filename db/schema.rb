@@ -10,6 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180209085530) do
+
+  create_table "wallet_histories", force: :cascade do |t|
+    t.string "transaction_type"
+    t.string "recepient_name"
+    t.integer "points"
+    t.datetime "created_at"
+    t.datetime "updated_at", null: false
+    t.integer "wallet_id"
+  end
+
+  create_table "wallets", force: :cascade do |t|
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
