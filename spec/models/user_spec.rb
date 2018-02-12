@@ -75,17 +75,7 @@ RSpec.describe User do
 
   context 'check validity of gender' do
 
-    let(:user1) { build(:user, gender: 'female') }
-    let(:user2) { build(:user, gender: 'none') }
-
-    it 'validates correct gender ' do
-      expect(user1.errors['gender']).to eq([])
-    end
-
-    it 'validates invalid gender ' do
-      expect(user2.valid?).to eq(false)
-      expect(user2.errors['gender']).to eq(["Invalid gender"])
-    end    
+    it { should validate_inclusion_of(:gender).in_array(['male','Female','Male','female']) }
 
   end
 
