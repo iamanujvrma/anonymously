@@ -6,8 +6,8 @@ RSpec.describe User do
 
     let(:user1) { build(:user, name: '12pinky') }
     let(:user2) { build(:user, name: '_pinky') }
-    let(:user3) { build(:user, name: 'p') }
-    let(:user4) { build(:user, name: 'pinkyroutbv egbs brejgbjbjkg bnjmsbnsjgrtkhb grejhgb') }
+    #let(:user3) { build(:user, name: 'p') }
+    #let(:user4) { build(:user, name: 'pinkyroutbv egbs brejgbjbjkg bnjmsbnsjgrtkhb grejhgb') }
     let(:user5) {build(:user, name: 'pinky rout')}
 
     it 'validates name with only alphabets'  do
@@ -26,6 +26,11 @@ RSpec.describe User do
       expect(user2.errors['name']).to eq(["name cannot start with a number or underscore"])
     end
     
+    it do
+     should validate_presence_of(:name).
+     with_message("can't be blank")
+    end
+
     it { should validate_length_of(:name).is_at_least(2) }
 
     #it 'validates name with length less than 2'  do
