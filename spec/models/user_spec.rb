@@ -87,5 +87,12 @@ RSpec.describe User do
 
   end
 
+  context 'check for User associations' do
+    
+    it { should have_many(:messages) }
+    it { should have_one(:wallet) }
+  
+  end
+
 end
 
