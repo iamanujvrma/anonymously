@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WalletsController < ApplicationController
   def index
     @wallets = Wallet.all
@@ -37,7 +39,6 @@ class WalletsController < ApplicationController
     Wallet.find(params[:id]).destroy
     redirect_to wallets_path
   end
-
 
   private
 
