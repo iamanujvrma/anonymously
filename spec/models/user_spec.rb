@@ -18,14 +18,13 @@ RSpec.describe User do
     it 'validates name starting with a number' do
       expect(user1.valid?).to eq(false)
       # expect(user1.errors).to eq([])
-      expect(user1.errors['name']).to
-      eq(['name cannot start with a number or underscore'])
+      error_msg = 'name cannot start with a number or underscore'
+      expect(user1.errors['name']).to eq([error_msg])
     end
 
     it 'validates name starting with underscore' do
       expect(user2.valid?).to eq(false)
-      expect(user2.errors['name']).to
-      eq(['name cannot start with a number or underscore'])
+      expect(user2.errors['name']).to eq([error_msg])
     end
 
     it do
@@ -88,7 +87,8 @@ RSpec.describe User do
   end
 
   context 'check for User associations' do
-    it { should have_many(:messages) }
+    it { should have_many(:sent_messages) }
+    it { should have_many(:received_messages) }
     it { should have_one(:wallet) }
   end
 end
