@@ -41,7 +41,13 @@ gem 'devise_invitable', '~> 1.7.0'
 
 gem 'carrierwave', '~> 1.0'
 
+<<<<<<< HEAD
 gem 'rubocop'
+=======
+gem 'faker'
+
+gem 'rubocop', '~> 0.52.1'
+>>>>>>> user_feature
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
