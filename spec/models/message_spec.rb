@@ -13,10 +13,21 @@ RSpec.describe Message, type: :model do
     it 'Checks that message does not exceed 1200 characters' do
       should validate_length_of(:content).is_at_most(1200)
     end
-=end
-    let(:message2) { build(:message) }
+
+    let(:user1) { build(:user, confirmed_at: Time.now)}
+    let(:user2) { build(:user, confirmed_at: Time.now)}
+    let(:message2) { build(:message, sender_id: user1.id, receiver_id: user2.id) }
     it 'Validates a valid message' do
       expect(message2).to be_valid
     end
-  end 	
+  end
+=end
+  context 'Checking Message association' do
+    
+    let(:user1) { build(:user, confirmed_at: Time.now)}
+    let(:user2) { build(:user, confirmed_at: Time.now)}
+    let(:message2) { build(:message, sender_id: user1.id, receiver_id: user2.id) }
+    it { should belongs_to(:user) }
+  end
+
 end
