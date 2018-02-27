@@ -20,14 +20,12 @@ RSpec.describe Message, type: :model do
     it 'Validates a valid message' do
       expect(message2).to be_valid
     end
-  end
 =end
+  end
+
   context 'Checking Message association' do
-    
-    let(:user1) { build(:user, confirmed_at: Time.now)}
-    let(:user2) { build(:user, confirmed_at: Time.now)}
-    let(:message2) { build(:message, sender_id: user1.id, receiver_id: user2.id) }
-    it { should belongs_to(:user) }
+    it { should belong_to(:sender) }
+    it { should belong_to(:receiver) }
   end
 
 end

@@ -5,5 +5,6 @@ FactoryBot.define do
     gender "male"
     email "pinkyrout10@gmail.com"
     password "pinky@10"
+    association :message, factory: :message
   end
 end

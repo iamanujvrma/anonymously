@@ -61,6 +61,7 @@ group :development, :test do
   gem 'shoulda'
 
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 
 end
 
