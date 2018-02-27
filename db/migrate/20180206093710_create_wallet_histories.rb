@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Creating Wallet History
 class CreateWalletHistories < ActiveRecord::Migration[5.1]
   def change
     create_table :wallet_histories do |t|
