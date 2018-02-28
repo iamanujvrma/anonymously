@@ -11,11 +11,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   # def create
   #   super
-  # end
+  # end'users/sessions' }
 
+  def edit
+    @user = User.find(params[:id]) 
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(configure_account_update_params)
+      redirect_to user_path(@user)
+    else
+      render 'edit'
+    end
+  end
   # GET /resource/edit
-  # def edit 
-  # end
+  # def edit 'users/sessions' }
+  # end'users/sessions' }
 
   # PUT /resource
   # def update
@@ -44,9 +56,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+   def configure_account_update_params
+     devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+   end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
