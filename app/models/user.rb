@@ -29,14 +29,13 @@ class User < ApplicationRecord
   private
 
   def valid_dob?
-    return unless valid_date?
-    return unless date_of_birth.future?
-    errors.add(:date_of_birth, 'Date of Birth cannot be in future.')
+    unless date_of_birth.is_a?(Time)
+      errors.add(:date_of_birth, 'Is an invalid date.')
+      return
+    end
+    if date_of_birth.future?
+      errors.add(:date_of_birth, 'Date of Birth cannot be in future.')
+    end
   end
 
-  def valid_date?
-    return true if date_of_birth.is_a?(Time)
-    errors.add(:date_of_birth, 'Is an invalid date.')
-    false
-  end
 end
