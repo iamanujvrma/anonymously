@@ -54,6 +54,9 @@ RSpec.describe User do
     # let(:user3) { build(:user, date_of_birth: nil) }
     let(:user4) { build(:user, date_of_birth: '2019-01-01') }
 
+    it should validate_presence_of(:date_of_birth)
+      .with_message("can't be blank")
+
     it 'vaildates date of birth is Time type' do
       expect(user1.valid?).to eq(true)
       expect(user1.errors[:date_of_birth]).to eq([])
@@ -61,16 +64,20 @@ RSpec.describe User do
 
     it 'vaildates date of birth is not Time type' do
       expect(user2.valid?).to eq(false)
-      expect(user2.errors[:date_of_birth]).to eq(["can't be blank",
-                                                  'Is an invalid date.'])
+      expect(user2.errors[:date_of_birth])
+        .to eq(["can't be blank", 'Is an invalid date.'])
     end
 
     # it 'is not valid without date of birth' do
     #   expect(user3.valid?).to eq(false)
-    #   expect(user3.errors[:date_of_birth]).to eq(["can't be blank", 'Is an invalid date.'])
+    #   expect(user3.errors[:date_of_birth])
+    #     .to eq(["can't be blank", 'Is an invalid date.'])
     # end
 
-    it { should validate_presence_of(:date_of_birth) }
+    it do
+      should validate_presence_of(:date_of_birth)
+        .with_message("can't be blank")
+    end
 
     # it 'is valid with date of birth' do
     #   expect(user1.valid?).to eq(true)
@@ -79,7 +86,8 @@ RSpec.describe User do
 
     it 'is not valid for future date' do
       expect(user4.valid?).to eq(false)
-      expect(user4.errors[:date_of_birth]).to eq(['Date of Birth cannot be in future.'])
+      expect(user4.errors[:date_of_birth])
+        .to eq(['Date of Birth cannot be in future.'])
     end
   end
 
