@@ -24,6 +24,7 @@ RSpec.describe User do
 
     it 'validates name starting with underscore' do
       expect(user2.valid?).to eq(false)
+      error_msg = 'name cannot start with a number or underscore'
       expect(user2.errors['name']).to eq([error_msg])
     end
 

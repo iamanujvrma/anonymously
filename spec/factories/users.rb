@@ -3,7 +3,7 @@ FactoryBot.define do
     name 'MyString'
     date_of_birth '2018-02-06 16:21:16'
     gender 'male'
-    email 'pinkyrout10@gmail.com'
+    email  Faker::Internet.email
     password 'pinky@10'
   end
 end
