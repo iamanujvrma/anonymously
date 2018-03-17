@@ -2,30 +2,71 @@ require 'rails_helper'
 
 RSpec.describe Message, type: :model do
   #pending "add some examples to (or delete) #{__FILE__}"
-  context 'Checking Content Validity' do
-=begin    
-    #let(:message1) { build(:message) }
-    #let(:message2) { build(:message) }
-    #let(:message3) { build(:message, content: 'Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.Hello, this is sample text.') }
-    it 'Checks that message is not blank' do
-      should validate_presence_of(:content).with_message("content can't be blank(nil)")
-    end
-    it 'Checks that message does not exceed 1200 characters' do
-      should validate_length_of(:content).is_at_most(1200)
+  #context 'Checking Content Validity' do
+ context 'Checking Content Validity' do
+    let(:user1) do
+      user1 = User.create(name:'MyString', date_of_birth:'2018-02-06 16:21:16', gender:'male',email:Faker::Internet.email, password:'pinky@10')
     end
 
-    let(:user1) { build(:user, confirmed_at: Time.now)}
-    let(:user2) { build(:user, confirmed_at: Time.now)}
-    let(:message2) { build(:message, sender_id: user1.id, receiver_id: user2.id) }
-    it 'Validates a valid message' do
-      expect(message2).to be_valid
+    let(:user2) do #{ build(:user, confirmed_at: Time.now) }
+      user2 = User.create(name:'MyString', date_of_birth:'2018-02-06 16:21:16', gender:'male',email:Faker::Internet.email, password:'pinky@10')
     end
-=end
+
+    let(:message1) do
+      message1 = Message.create(sender_id: user1.id, receiver_id: user2.id, content:'Hello how are you!')
+    end
+
+    let(:message2) do
+      message2 = Message.create(sender_id: user1.id, receiver_id: user2.id, content:'')
+    end
+    
+    it 'is valid content' do
+      expect(message1).to be_valid
+    end
+
+    it 'is invalid content' do
+      expect(message2).to_not be_valid
+    end  
+
   end
 
-  context 'Checking Message association' do
+
+
+  context 'Checking User validity' do
+
+    let(:user3) do
+
+      user3 = User.create(name:'MyString', date_of_birth:'2018-02-06 16:21:16', gender:'male',email:Faker::Internet.email, password:'pinky@10')
+
+    end
+
+    let(:message3) do
+
+      message3 = Message.create(sender_id: user3.id, receiver_id: user3.id, content:'sender reciver are same')
+
+    end
+
+
+
+    it 'is invalid' do
+
+      expect(message3).to_not be_valid
+
+    end
+
+  end
+
+
+
+  context 'Checking Message Associations' do
+
     it { should belong_to(:sender) }
+
     it { should belong_to(:receiver) }
+
   end
+
 
 end
+
+
