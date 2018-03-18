@@ -42,7 +42,13 @@ RSpec.describe Message, type: :model do
 
     let(:message3) do
 
-      message3 = Message.create(sender_id: user3.id, receiver_id: user3.id, content:'sender reciver are same')
+      message3 = Message.create(sender_id: user3.id, receiver_id: user3.id, content:'sender receiver are same')
+
+    end
+
+    let(:message4) do
+
+      message4 = Message.create(sender_id: user3.id, receiver_id: '100', content:'receiver does not exist')
 
     end
 
@@ -53,6 +59,14 @@ RSpec.describe Message, type: :model do
       expect(message3).to_not be_valid
 
     end
+
+    it 'is invalid when user does not exist' do
+
+      expect(message4).to_not be_valid
+
+    end
+
+
 
   end
 
