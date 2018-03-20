@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :gender, presence: true
@@ -22,17 +23,21 @@ class User < ApplicationRecord
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
 
+
+  def messages
+    Message.where("sender_id = ? OR receiver_id = ?", self.id, self.id)
+  end
+
   private
 
   def valid_dob?
-    return unless valid_date?
-    return unless date_of_birth.future?
-    errors.add(:date_of_birth, 'Date of Birth cannot be in future.')
+    unless date_of_birth.is_a?(Time)
+      errors.add(:date_of_birth, 'Is an invalid date.')
+      return
+    end
+    if date_of_birth.future?
+      errors.add(:date_of_birth, 'Date of Birth cannot be in future.')
+    end
   end
 
-  def valid_date?
-    return true if date_of_birth.is_a?(Time)
-    errors.add(:date_of_birth, 'Is an invalid date.')
-    false
-  end
 end

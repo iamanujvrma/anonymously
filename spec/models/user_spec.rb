@@ -18,12 +18,14 @@ RSpec.describe User do
     it 'validates name starting with a number' do
       expect(user1.valid?).to eq(false)
       # expect(user1.errors).to eq([])
-      expect(user1.errors['name']).to eq(['name cannot start with a number or underscore'])
+      error_msg = 'name cannot start with a number or underscore'
+      expect(user1.errors['name']).to eq([error_msg])
     end
 
     it 'validates name starting with underscore' do
       expect(user2.valid?).to eq(false)
-      expect(user2.errors['name']).to eq(['name cannot start with a number or underscore'])
+      error_msg = 'name cannot start with a number or underscore'
+      expect(user2.errors['name']).to eq([error_msg])
     end
 
     it do
@@ -35,12 +37,14 @@ RSpec.describe User do
 
     # it 'validates name with length less than 2'  do
     #  expect(user3.valid?).to eq(false)
-    #  expect(user3.errors['name']).to eq(["is too short (minimum is 2 characters)"])
+    #  expect(user3.errors['name']).to
+    # eq(["is too short (minimum is 2 characters)"])
     # end
     it { should validate_length_of(:name).is_at_most(20) }
     # it 'validates name with length more than 20' do
     #  expect(user4.valid?).to eq(false)
-    #  expect(user4.errors['name']).to eq(["is too long (maximum is 20 characters)"])
+    #  expect(user4.errors['name']).to
+    # eq(["is too long (maximum is 20 characters)"])
     # end
   end
 
@@ -50,6 +54,9 @@ RSpec.describe User do
     # let(:user3) { build(:user, date_of_birth: nil) }
     let(:user4) { build(:user, date_of_birth: '2019-01-01') }
 
+    it should validate_presence_of(:date_of_birth)
+      .with_message("can't be blank")
+
     it 'vaildates date of birth is Time type' do
       expect(user1.valid?).to eq(true)
       expect(user1.errors[:date_of_birth]).to eq([])
@@ -57,16 +64,20 @@ RSpec.describe User do
 
     it 'vaildates date of birth is not Time type' do
       expect(user2.valid?).to eq(false)
-      expect(user2.errors[:date_of_birth]).to eq(["can't be blank",
-                                                  'Is an invalid date.'])
+      expect(user2.errors[:date_of_birth])
+        .to eq(["can't be blank", 'Is an invalid date.'])
     end
 
     # it 'is not valid without date of birth' do
     #   expect(user3.valid?).to eq(false)
-    #   expect(user3.errors[:date_of_birth]).to eq(["can't be blank", 'Is an invalid date.'])
+    #   expect(user3.errors[:date_of_birth])
+    #     .to eq(["can't be blank", 'Is an invalid date.'])
     # end
 
-    it { should validate_presence_of(:date_of_birth) }
+    it do
+      should validate_presence_of(:date_of_birth)
+        .with_message("can't be blank")
+    end
 
     # it 'is valid with date of birth' do
     #   expect(user1.valid?).to eq(true)
@@ -75,7 +86,8 @@ RSpec.describe User do
 
     it 'is not valid for future date' do
       expect(user4.valid?).to eq(false)
-      expect(user4.errors[:date_of_birth]).to eq(['Date of Birth cannot be in future.'])
+      expect(user4.errors[:date_of_birth])
+        .to eq(['Date of Birth cannot be in future.'])
     end
   end
 
@@ -84,7 +96,8 @@ RSpec.describe User do
   end
 
   context 'check for User associations' do
-    it { should have_many(:messages) }
+    it { should have_many(:sent_messages) }
+    it { should have_many(:received_messages) }
     it { should have_one(:wallet) }
   end
 end
