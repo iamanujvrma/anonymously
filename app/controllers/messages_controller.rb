@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   def new
-	@sent_message = current_user.sent_messages.new()
-  print 'hii'
+  	@sent_message = current_user.sent_messages.new()
+    print 'hii'
   end
 
   def create
