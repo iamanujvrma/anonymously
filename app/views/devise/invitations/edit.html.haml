@@ -2,6 +2,21 @@
 = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f|
   = devise_error_messages!
   = f.hidden_field :invitation_token
+  .field
+    = f.label :name
+    %br/
+    = f.text_field :name, autofocus: true
+  .radio
+    = f.label :gender
+    %br/
+    = f.radio_button :gender, 'Male'
+    Male
+    = f.radio_button :gender, 'Female', :checked => true
+    Female
+  .field
+    = f.label :date_of_birth
+    %br/
+    = f.date_field :date_of_birth
   - if f.object.class.require_password_on_accepting
     %p
       = f.label :password
