@@ -54,8 +54,10 @@ RSpec.describe User do
     # let(:user3) { build(:user, date_of_birth: nil) }
     let(:user4) { build(:user, date_of_birth: '2019-01-01') }
 
-    it should validate_presence_of(:date_of_birth)
-      .with_message("can't be blank")
+    it do
+      should validate_presence_of(:date_of_birth)
+        .with_message("can't be blank")
+    end
 
     it 'vaildates date of birth is Time type' do
       expect(user1.valid?).to eq(true)
@@ -92,7 +94,7 @@ RSpec.describe User do
   end
 
   context 'check validity of gender' do
-    it { should validate_inclusion_of(:gender).in_array(%w[male Female Male female]) }
+    it { should validate_inclusion_of(:gender).in_array(%w[Female Male]) }
   end
 
   context 'check for User associations' do

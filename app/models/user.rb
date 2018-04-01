@@ -8,7 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :gender, presence: true
-  validates_inclusion_of :gender, in: %w[Male male Female female], message: 'Invalid gender'
+  validates_inclusion_of :gender, in: %w[Male Female], message: 'Invalid gender'
 
   validates :name, presence: true,
                    length: { minimum: 2, maximum: 20 },
