@@ -6,3 +6,13 @@
   = form_for(User.new, url: user_invitation_path, html: {class: 'form-inline'}) do |f|
     = f.text_field :email, placeholder: 'Email',label:false
     = f.submit 'Invite User'
+  =link_to "Create Message", new_message_path(current_user)
+
+  %table
+    %tr
+      %th content
+    - @messages.each do |message|
+      %tr
+        %td=message.content
+        %td=link_to "like"
+        %td=link_to "unlock"
