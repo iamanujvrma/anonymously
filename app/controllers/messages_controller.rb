@@ -23,5 +23,5 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:receiver_id, :content)
- 	end
+  end
 end
