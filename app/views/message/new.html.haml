@@ -1,0 +1,12 @@
+=form_with(model: @message, local: true) do |form|
+	%table{ :border => 0, :width => "100%", :height => "100%" }
+		%tr
+			%td=form.label 'receiver_email'
+			%td=form.text_field 'receiver_id'
+		%tr
+			%td=form.label'content'
+			%td=form.text_field 'content'
+		%tr
+			%td=form.submit	'SUBMIT'
+
+
