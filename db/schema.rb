@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20180317062650) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "date_of_birth"
@@ -38,7 +41,7 @@ ActiveRecord::Schema.define(version: 20180317062650) do
     t.datetime "invitation_accepted_at"
     t.integer "invitation_limit"
     t.string "invited_by_type"
-    t.integer "invited_by_id"
+    t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.string "avatar"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
