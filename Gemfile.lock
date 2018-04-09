@@ -140,6 +140,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.0.2)
       ast (~> 2.4.0)
+    pg (1.0.0)
     powerpack (0.1.1)
     public_suffix (3.0.1)
     puma (3.11.2)
@@ -283,8 +284,10 @@ DEPENDENCIES
   letter_opener
   listen (>= 3.0.5, < 3.2)
   mini_magick
+  pg
   puma (~> 3.7)
   rails (~> 5.1.4)
+  rspec-rails
   rubocop
   sass-rails (~> 5.0)
   selenium-webdriver
