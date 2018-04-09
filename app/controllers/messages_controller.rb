@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   end
   
   def new
-  	@message = current_user.sent_messages.new()
+    @message = current_user.sent_messages.new()
   end
 
   def create
