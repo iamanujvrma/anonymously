@@ -22,4 +22,8 @@ test:
 
 production:
   <<: *default
-  database: anonymously_production
+  database: 'd8mqlonebk8953'
+  username: 'bpwlooueirgvld'
+  password: '4ac191e9b6f47ecaca21cffbe933d68eba0d7356d0a61c02f91b87645a445a38'
+  host: 'ec2-54-83-19-244.compute-1.amazonaws.com'
+  port: 5432
