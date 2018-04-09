@@ -15,6 +15,19 @@ ActiveRecord::Schema.define(version: 20180317062650) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "content"
+    t.integer "is_liked", default: 0
+    t.integer "is_unlocked", default: 0
+    t.integer "is_read", default: 0
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "date_of_birth"
@@ -53,17 +66,6 @@ ActiveRecord::Schema.define(version: 20180317062650) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "content"
-    t.integer "is_liked", default: 0
-    t.integer "is_unlocked", default: 0
-    t.integer "is_read", default: 0
-    t.integer "sender_id"
-    t.integer "receiver_id"
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
-  end
-
+  add_foreign_key "messages", "users", column: "receiver_id"
+  add_foreign_key "messages", "users", column: "sender_id"
 end
