@@ -50,4 +50,14 @@ ActiveRecord::Schema.define(version: 20180317062650) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "receiver_id"
+    t.text "content"
+    t.integer "is_liked", default: 0
+    t.integer "is_unlocked", default: 0
+    t.integer "is_read", default: 0
+  end
+
 end
