@@ -22,8 +22,8 @@ test:
 
 production:
   <<: *default
-  database: 'd8mqlonebk8953'
-  username: 'bpwlooueirgvld'
-  password: '4ac191e9b6f47ecaca21cffbe933d68eba0d7356d0a61c02f91b87645a445a38'
-  host: 'ec2-54-83-19-244.compute-1.amazonaws.com'
+  database: 'dbvirv4dev09so'
+  username: 'yvcwniagdwvqnb'
+  password: '40df325e38b189f6f927eafc5677e1157b3ade43f96e89139d03700601ad554e'
+  host: 'ec2-54-225-96-191.compute-1.amazonaws.com'
   port: 5432
