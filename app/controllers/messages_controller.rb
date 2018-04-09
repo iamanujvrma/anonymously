@@ -1,21 +1,27 @@
 class MessagesController < ApplicationController
+  def index
+  end
+  
   def new
-  	@sent_message = current_user.sent_messages.new()
-    print 'hii'
+  	@message = current_user.sent_messages.new()
   end
 
   def create
-    print 'hi server'
-    @sent_message = current_user.sent_messages.new(message_params)
-    @sent_message.save!
-    if @sent_message.save!
+    m1 = message_params
+    @email = m1[:receiver_id]
+    m1[:receiver_id] = User.find_by_email(@email).id
+    @message = current_user.sent_messages.new(m1)
+    @message.save!
+    if @message.save!
       redirect_to dashboard_index_path
     else
-      redirect_to user_message_path(current_user)
+      redirect_to new_message_path(current_user)
     end
   end
+
   private
-  	def message_params
-   		params.require(:message).permit(:receiver_id, :content)
+
+  def message_params
+    params.require(:message).permit(:receiver_id, :content)
  	end
 end

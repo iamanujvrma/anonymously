@@ -1,4 +1,4 @@
-=form_with(model: @message, local: true, method: :post) do |form|
+=form_with(model: @message, local: true) do |form|
 	%table{ :border => 0, :width => "100%", :height => "100%" }
 		%tr
 			%td=form.label 'receiver_email'
@@ -7,4 +7,6 @@
 			%td=form.label'content'
 			%td=form.text_field 'content'
 		%tr
-			%td=form.submit	'SUBMIT'#link_to "send", user_messages_path, method: :post
+			%td=form.submit	'SUBMIT'
+
+

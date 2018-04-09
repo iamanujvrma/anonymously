@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   root "home#index"
   get 'dashboard/index'
-  resources :users do
-  	resources :messages
-  end
+  
+  resources :messages
+  
   
   #devise_for :users, controllers: { sessions: 'users/sessions' }
   #resources :users
