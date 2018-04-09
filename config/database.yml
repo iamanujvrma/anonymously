@@ -1,5 +1,5 @@
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
@@ -7,17 +7,16 @@ default: &default
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: ANONYMOUSLY_development
   password: <%= ENV['ANONYMOUSLY_DATABASE_PASSWORD'] %>
   timeout: 5000
 
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: ANONYMOUSLY_test
 
 production:
   <<: *default
-  adapter: postgresql
   database: 'd8mqlonebk8953'
   username: 'bpwlooueirgvld'
   password: '4ac191e9b6f47ecaca21cffbe933d68eba0d7356d0a61c02f91b87645a445a38'
