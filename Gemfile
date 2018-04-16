@@ -45,9 +45,11 @@ gem "mini_magick"
 
 gem 'faker'
 
-gem 'rubocop', '~> 0.52.1'
-
 gem "letter_opener", :group => :development
+
+gem 'rubocop'
+
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

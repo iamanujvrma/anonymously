@@ -12,6 +12,19 @@
 
 ActiveRecord::Schema.define(version: 20180317062650) do
 
+  create_table "messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "content"
+    t.integer "is_liked", default: 0
+    t.integer "is_unlocked", default: 0
+    t.integer "is_read", default: 0
+    t.integer "sender_id"
+    t.integer "receiver_id"
+    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "date_of_birth"
