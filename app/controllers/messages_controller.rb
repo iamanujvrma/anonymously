@@ -7,12 +7,12 @@ class MessagesController < ApplicationController
   end
 
   def create
-    m1 = message_params
-    @email = m1[:receiver_id]
+    parameters = message_params
+    @email = parameters[:receiver_id]
     @receiver = User.find_by_email(@email)
-    if @receiver != nil
-      m1[:receiver_id] = @receiver.id
-      @message = current_user.sent_messages.new(m1)
+    if @receiver and @receiver != current_user
+      parameters[:receiver_id] = @receiver.id
+      @message = current_user.sent_messages.new(parameters)
       if @message.save!
         redirect_to dashboard_index_path
       else
