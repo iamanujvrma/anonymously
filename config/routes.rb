@@ -5,4 +5,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :messages
+
+  resources :messages do
+    member do
+      get :unlock
+    end
+  end
 end
