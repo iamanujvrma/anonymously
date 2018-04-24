@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
     new_message[:receiver_id] = User.find_by_email(@email).id
     @message = current_user.sent_messages.new(new_message)
     message_saved = @message.save
-    if message.saved
+    if message_saved
       redirect_to dashboard_index_path
     else
       redirect_to new_message_path(current_user)
