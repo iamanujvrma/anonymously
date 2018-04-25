@@ -9,10 +9,11 @@
 
   %table
     %tr
-      %th content
+      %th Received Messages
     - @messages.each do |message|
       %tr
         %td=message.content
         %td=link_to "like", like_message_path(message) if message.is_liked == 0
         %td=" liked " if message.is_liked == 1
-        %td=link_to "unlock"
+        %td=link_to "unlock", unlock_message_path(message) if message.is_unlocked == 0
+        %td=User.find(message.sender_id).email if message.is_unlocked == 1
