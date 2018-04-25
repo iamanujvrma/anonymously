@@ -5,10 +5,13 @@ class DashboardController < ApplicationController
   def index
     @messages = current_user.received_messages.all
     @messages.each do |msg|
-      print msg.content
+    #print msg.content
     end
   end
 
+  def like
+    print 'Dashboard  Controller like'
+  end
 =begin
 
 =end
