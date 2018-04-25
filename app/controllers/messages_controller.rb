@@ -9,13 +9,20 @@ class MessagesController < ApplicationController
   def create
     new_message = message_params
     @email = new_message[:receiver_id]
-    new_message[:receiver_id] = User.find_by_email(@email).id
-    @message = current_user.sent_messages.new(new_message)
-    message_saved = @message.save
-    if message_saved
-      redirect_to dashboard_index_path
+    @receiver = User.find_by_email(@email)
+    if @receiver
+      new_message[:receiver_id] = @receiver.id
+      @message = current_user.sent_messages.new(new_message)
+      if @message.save
+        redirect_to dashboard_index_path
+      else
+        @message[:receiver_id] = @email
+        render 'new'
+      end
     else
-      redirect_to new_message_path(current_user)
+      @message = current_user.sent_messages.new(new_message)
+      @message.errors.add(:receiver_id, "id does not exist")
+      render 'new'
     end
   end
 
