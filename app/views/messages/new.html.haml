@@ -3,9 +3,11 @@
     %tr
       %td=form.label 'receiver_email'
       %td=form.text_field 'receiver_id'
+      %td=@message.errors.full_message_for(:receiver_id) if @message.errors.messages[:receiver_id]
     %tr
       %td=form.label'content'
       %td=form.text_field 'content'
+      %td=@message.errors.full_message_for(:content) if @message.errors.messages[:content]
     %tr
       %td=form.submit	'SUBMIT'
 

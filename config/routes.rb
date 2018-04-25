@@ -5,9 +5,17 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :messages
+
+  resources :messages do
+    member do
+      get :unlock
+    end
+  end
+
   resources :messages do
   	member do
-  		get :like
+  	  get :like
   	end
   end
+
 end
