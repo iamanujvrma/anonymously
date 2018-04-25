@@ -3,4 +3,16 @@ Rails.application.routes.draw do
   root "home#index"
   devise_for :users
   resources :messages
+  resources :messages do
+    member do
+      get :unlock
+    end
+  end
+  
+  resources :messages do
+    member do
+      get :like
+    end
+  end
+  
 end

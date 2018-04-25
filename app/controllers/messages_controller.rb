@@ -4,17 +4,17 @@ class MessagesController < ApplicationController
   end
   
   def new
-    @message = current_user.sent_messages.new()
+    @message = current_user.sent_messages.new
   end
 
   def create
     @message = current_user.sent_messages.new
-    m1 = message_params
-    @email = m1[:receiver_id]
-    if User.exists?(email: @email)
-      m1[:receiver_id] = User.find_by_email(@email).id
-      @message = current_user.sent_messages.new(m1)
-      @message.save!
+    parameters = message_params
+    @email = parameters[:receiver_id]
+    @receiver = User.find_by_email(@email)
+    if @receiver and @receiver != current_user
+      parameters[:receiver_id] = @receiver.id
+      @message = current_user.sent_messages.new(parameters)
       if @message.save!
         redirect_to dashboard_index_path
       else
@@ -23,6 +23,22 @@ class MessagesController < ApplicationController
     else
       @message.errors.add(:receiver_id,"does not exists.")
     end
+  end
+
+  def unlock
+    id = params[:id].to_i
+    current_message = current_user.received_messages.find(id)
+    current_message[:is_unlocked] = 1
+    current_message.save!
+    redirect_to dashboard_index_path
+  end
+
+  def like
+    message_id = params[:id].to_i
+    current_message = current_user.received_messages.find(message_id)
+    current_message.is_liked = 1 
+    current_message.save
+    redirect_to dashboard_index_path
   end
 
   private
