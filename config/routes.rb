@@ -11,4 +11,11 @@ Rails.application.routes.draw do
       get :unlock
     end
   end
+
+  resources :messages do
+  	member do
+  	  get :like
+  	end
+  end
+
 end
