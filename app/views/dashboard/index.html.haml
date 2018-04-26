@@ -7,7 +7,7 @@
         = form_for(User.new, url: user_invitation_path, html: {class: 'form-inline'}) do |f|
           = f.text_field :email, placeholder: 'Email',label:false
           = f.submit 'Invite User'
-        =link_to "Create Message", new_message_path(current_user), class: "btn btn-secondary"
+        =link_to "Create Message", new_message_path(current_user), class: "btn btn-secondary" 
       %div.col-md-9
         %div.row
           %h2 Received Messages
