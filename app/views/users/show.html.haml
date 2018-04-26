@@ -1,0 +1,21 @@
+.row
+  = render 'users/sidebar'
+  .col-md-1
+  .col-md-4.mt-5.ml-5
+    - if current_user.avatar.present?
+      = image_tag(current_user.avatar.medium.url)
+    - else
+      = image_tag(current_user.avatar.default_url)
+  .col-md-3.mt-5
+    .row.mt-2
+      Name: 
+      = @user.name
+    .row.mt-2
+      Gender: 
+      = @user.gender
+    .row.mt-2
+      Email: 
+      = @user.email
+    .row.mt-2
+      Date of Birth 
+      = @user.date_of_birth
