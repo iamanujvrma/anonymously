@@ -11,3 +11,18 @@ User.create(name: 'Elon', email: 'elon@musk.com', password: 'teslaislife', gende
 User.create(name: 'Solarcity', email: 'solar@city.com', password: 'solarisfuture', gender: 'Female', date_of_birth: '2008-02-09 08:05:20')
 User.create(name: 'Starman', email: 'starman@spacex.com', password: 'roadsterisawesome', gender: 'Male', date_of_birth: '2018-02-05 01:15:20')
 
+TRANSACTION_TYPES = %w[Referral Like Unlocked].freeze
+(1..4).each do |i|
+  wallet = Wallet.create(points: 0, user_id: i)
+  10.times do
+    wallet.wallet_histories.create do |record|
+      record.wallet_id = wallet.id
+      record.recepient_name = Faker::Name.name
+      random = wallet.points < 10 ? rand(2) : rand(3)
+      record.transaction_type = TRANSACTION_TYPES[random]
+      record.points = [10, 5, -10][random]
+      wallet.points += record.points
+    end
+    wallet.update points: wallet.points
+  end
+end
