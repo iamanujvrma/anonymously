@@ -28,8 +28,7 @@
                 /- if @sender.avatar.present?
                 /p @sender
                 /=image_tag(@sender.avatar.thumb.url)
-
-
+        
           %div.row.mb-3.mt-1
             %div.col-md-2
               =link_to "like", like_message_path(message), class: "btn btn-sm btn-primary" if message.is_liked == 0
@@ -37,6 +36,8 @@
             %div.col-md-3
               =link_to "unlock", unlock_message_path(message), class: "btn btn-sm btn-primary" if message.is_unlocked == 0
               =User.find(message.sender_id).email if message.is_unlocked == 1
+        =paginate @messages
+        =page_entries_info @messages
 
 #invite_user.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "invite_user_Label", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
