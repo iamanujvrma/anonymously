@@ -2,6 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
     %title Anonymously
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -10,3 +11,5 @@
     = render 'shared/links'
     = render 'layouts/custom_error'
     = yield
+    %footer.container-fluid.text-center
+      %p © A2B1P3R1T1
