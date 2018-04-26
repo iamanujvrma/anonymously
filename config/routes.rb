@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   	end
   end
 
+  resources :wallet
+  resources :wallet_histories
+
 end

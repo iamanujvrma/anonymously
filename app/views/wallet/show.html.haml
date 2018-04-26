@@ -1,0 +1,24 @@
+%h1 Wallet
+Wallet points = 
+= @wallet.points
+%h1 Wallet Histories
+%table{:align => "center", :border => "10"}
+  %th Points
+  %th Type
+  %th User's Name
+  %th Time
+  %th Date
+  - @wallet.wallet_histories.each do |history|
+    %tr
+      %td
+        = '+' if history.points > 0
+        = history.points
+      %td
+        = history.transaction_type
+      %td
+        = history.recepient_name
+      %td
+        = history.created_at.strftime("%I : %M %p")
+      %td
+        = history.created_at.strftime("%a , %d %b %y")
+    %tr
