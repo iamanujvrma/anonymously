@@ -49,6 +49,15 @@ gem "letter_opener", :group => :development
 
 gem 'rubocop'
 
+gem 'bootstrap', '~> 4.1.0'
+
+gem 'autoprefixer-rails'
+
+gem 'jquery-rails'
+
+gem 'popper_js', '~> 1.12.9'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
