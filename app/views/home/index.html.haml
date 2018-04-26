@@ -5,56 +5,61 @@
     %meta{ :content => "Anonymous message service with little twist", :name => "description" }
     %meta{ :content => "A2B1P3R1T1", :name => "author" }
     %link{ :href => "http://creativecommons.org/licenses/by/3.0/", :rel => "license", :title => "Creative Commons Attribution 3.0 Unported License" }
-  .container
-    .row
-      .col-md-9
-        %center
-          %h2
-          = "Express Anonymous"
-          %br
-          = image_tag "logo.png"
-          %p
-            Posted on
-            %time{ :datetime => "2009-09-04T16:31:24+02:00" }= "September 4th 2009"
-            by
-            %a{ :href => "#" }= "A2B1P3R1T1"
-            %article
-              %p
-                Anonymous message service with little twist.
-              %p
-                Come JOIN US!
-      .col-md-3
-        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-          .field
-            = f.label :name
-            %br/
-            = f.text_field :name, autofocus: true
-          .field
-            = f.label :email
-            %br/
-            = f.email_field :email, autofocus: true, autocomplete: "email"
-          .field
-            = f.label :password
-            - if @minimum_password_length
-              %em
-                (#{@minimum_password_length} characters minimum)
-            %br/
-            = f.password_field :password, autocomplete: "off"
-          .field
-            = f.label :password_confirmation
-            %br/
-            = f.password_field :password_confirmation, autocomplete: "off"
-          .radio
-            = f.label :gender
-            %br/
-            = f.radio_button :gender, 'Male'
-            Male 
-            = f.radio_button :gender, 'Female', :checked => true
-            Female
-          .field
-            = f.label :date_of_birth
-            %br/
-            = f.date_field :date_of_birth
-          .actions
-            = f.submit "Sign up"
-        = render "devise/shared/links"
+  .row
+    .col-md-9
+      %center
+        %h2
+        = "Express Anonymous"
+        %br
+        = image_tag "logo.png"
+        %p
+          Posted on
+          %time{ :datetime => "2009-09-04T16:31:24+02:00" }= "September 4th 2009"
+          by
+          %a{ :href => "#" }= "A2B1P3R1T1"
+          %article
+            %p
+              Anonymous message service with little twist.
+            %p
+              Come JOIN US!
+    .col-md-3
+      .panel.panel-success
+        .panel-heading
+          .panel-title
+            %h4 Join Anonymous!
+        .panel-body
+          = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+            = devise_error_messages!
+            .field
+              = f.label :name
+              %br/
+              = f.text_field :name, autofocus: true
+            .field
+              = f.label :email
+              %br/
+              = f.email_field :email, autofocus: true, autocomplete: "email"
+            .field
+              = f.label :password
+              - if @minimum_password_length
+                %em
+                  (#{@minimum_password_length} characters minimum)
+              %br/
+              = f.password_field :password, autocomplete: "off"
+            .field
+              = f.label :password_confirmation
+              %br/
+              = f.password_field :password_confirmation, autocomplete: "off"
+            .radio
+              = f.label :gender
+              %br/
+              = f.radio_button :gender, 'Male'
+              Male 
+              = f.radio_button :gender, 'Female', :checked => true
+              Female
+            .field
+              = f.label :date_of_birth
+              %br/
+              = f.date_field :date_of_birth
+            .actions
+              = f.submit "Sign up"
+          = render "devise/shared/links"
