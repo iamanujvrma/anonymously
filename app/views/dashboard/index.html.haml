@@ -14,13 +14,27 @@
         %div.row
           %h2 Received Messages
         - @messages.each do |message|
-          %div.row.border.border-rounded.border-secondary.mt-3.bg.bg-light
-            %div.col-md-8
+          %div.row.border.border-rounded.border-secondary.mt-3.bg.bg-light.pt-3.pb-3
+            %div.col-md-9
               =message.content
+            %div.col-md-3
+              /=img.image_thumbnail "default.png"
+              - if message.is_unlocked == 0
+                %img.img-fluid.img-thumbnail{:src => "default1.png" }
+                /=image_tag("default.png")
+              - else
+                /=p User.find(message.sender_id)
+                /@sender = User.find(message.sender_id)
+                /- if @sender.avatar.present?
+                /p @sender
+                /=image_tag(@sender.avatar.thumb.url)
+
+
+          %div.row.mb-3.mt-1
             %div.col-md-2
-              =link_to "like", like_message_path(message), class: "btn btn-primary" if message.is_liked == 0
+              =link_to "like", like_message_path(message), class: "btn btn-sm btn-primary" if message.is_liked == 0
               =" liked " if message.is_liked == 1
-            %div.col-md-2
+            %div.col-md-3
               =link_to "unlock", unlock_message_path(message), class: "btn btn-sm btn-primary" if message.is_unlocked == 0
               =User.find(message.sender_id).email if message.is_unlocked == 1
 
