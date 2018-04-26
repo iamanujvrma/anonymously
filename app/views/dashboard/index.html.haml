@@ -3,24 +3,24 @@
   .container
     %div.row
       %div.col-md-2.mr-5.border-right
-        %div.row.mt-3
-          %button.btn.btn-primary{ "data-toggle" => "modal", "data-target" => "#invite_user" }
-            invite friends
-        %div.row.mt-3
-          %button.btn.btn-primary{ "data-toggle" => "modal", "data-target" => "#exampleModal" }
+        %div.row.mt-2.mr-2
+          %button.btn.btn-secondary.btn-md.btn-block{ "data-toggle" => "modal", "data-target" => "#invite_user" }
+            Invite Friends
+        %div.row.mt-2.mr-2
+          %button.btn.btn-secondary.btn-md.btn-block{ "data-toggle" => "modal", "data-target" => "#exampleModal" }
             Create Message
           /=link_to "Create Message", new_message_path(current_user), class: "btn btn-secondary" 
       %div.col-md-8
         %div.row
-          %h2 Received Messages
+          %p.font-weight-bold.text.text-info.text-right Received Messages
         - @messages.each do |message|
           %div.row.border.border-rounded.border-secondary.mt-3.bg.bg-light.pt-3.pb-3
-            %div.col-md-9
+            %div.col-md-9.text-info
               =message.content
             %div.col-md-3
               /=img.image_thumbnail "default.png"
               - if message.is_unlocked == 0
-                %img.img-fluid.img-thumbnail{:src => "default1.png" }
+                %img.img-thumbnail{:src => "default.png", }
                 /=image_tag("default.png")
               - else
                 /=p User.find(message.sender_id)
@@ -31,11 +31,16 @@
         
           %div.row.mb-3.mt-1
             %div.col-md-2
-              =link_to "like", like_message_path(message), class: "btn btn-sm btn-primary" if message.is_liked == 0
-              =" liked " if message.is_liked == 1
+              =link_to "Like", like_message_path(message), class: "btn btn-sm btn-secondary" if message.is_liked == 0
+              - if message.is_liked == 1
+                %button.btn.btn-secondary.btn-sm.btn-block{ "disabled" => "disabled" }
+                  Liked
+                
             %div.col-md-3
-              =link_to "unlock", unlock_message_path(message), class: "btn btn-sm btn-primary" if message.is_unlocked == 0
-              =User.find(message.sender_id).email if message.is_unlocked == 1
+              =link_to "Unlock", unlock_message_path(message), class: "btn btn-sm btn-secondary" if message.is_unlocked == 0
+              - if message.is_unlocked== 1
+                %button.btn.btn-secondary.btn-sm.btn-block{ "disabled" => "disabled" }
+                  =User.find(message.sender_id).email
         =paginate @messages
         =page_entries_info @messages
 
