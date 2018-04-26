@@ -9,7 +9,8 @@ class Message < ApplicationRecord
 
   def sender_id_not_equal_to_receiver_id?
     if sender_id == receiver_id
-      self.errors.add(:base, 'sender id cannot be same as received id')
+      self.errors.add(:receiver_id, 'cannot be same as sender')
     end
   end
+
 end
