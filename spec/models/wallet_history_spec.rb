@@ -12,7 +12,7 @@ RSpec.describe WalletHistory, type: :model do
     end
 
     let(:wallet_history1) do
-      wallet_history1 = wallet1.wallet_histories.create(points: 10, recepient_name: 'Raj', transaction_type: 'Referral')
+      wallet1.wallet_histories.create(points: 10, recepient_name: 'Raj', transaction_type: 'Referral')
     end
 
     it 'is valid content' do
@@ -29,11 +29,11 @@ RSpec.describe WalletHistory, type: :model do
   context 'Checking Wallet validity' do
 
     let(:wallet2) do
-      wallet2 = Wallet.create(points: 10, user_id: 2)
+      Wallet.create(points: 10, user_id: 2)
     end
 
     let(:wallet_history2) do
-      wallet_history2 = wallet2.wallet_histories
+      wallet2.wallet_histories
     end
 
   end
