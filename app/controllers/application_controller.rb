@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
-
+  helper_method :resource_name, :resource, :devise_mapping, :resource_class
   protected
 
   def configure_permitted_parameters

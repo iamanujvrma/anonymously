@@ -1,0 +1,36 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark 
+  %a.navbar-brand{:href => "#"} Anonymously
+  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
+    %span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    %ul.navbar-nav.ml-auto
+      - if user_signed_in?
+        %li.nav-item
+          %a.nav-link Hi, #{current_user.name}!!!
+          - if current_user.avatar.present?
+            %li.nav-item
+            = image_tag(current_user.avatar.thumb.url)
+      %li.nav-item.active
+      %a.nav-link{:href => root_path}
+        Home
+        %span.sr-only (current)
+      - if user_signed_in?
+        %li.nav-item
+          %a.nav-link{ :href => dashboard_index_path } DashBoard
+      - if user_signed_in?
+        %li.nav-item
+          %a.nav-link{ :href => edit_user_registration_path } Edit Profile
+      - else
+        %li.nav-item
+          %a.nav-link{ :href => new_user_registration_path } Register
+      - if user_signed_in?
+        %li.nav-item
+          %a.nav-link{ :href => destroy_user_session_path, method: :delete } Logout
+      - else
+        %li.nav-item
+          %a.nav-link{ :href => new_user_session_path } Login
+      
+
+
+
+
