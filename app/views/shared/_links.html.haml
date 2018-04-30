@@ -31,4 +31,4 @@
           %a.nav-link{ :href => new_user_session_path } Login
       - if user_signed_in?
         %li.nav-item
-          %a.nav-link{ :href => current_user.wallet } Wallet
+          %a.nav-link{ :href => wallet_path(current_user.id) } Wallet

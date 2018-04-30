@@ -1,6 +1,6 @@
 %h1 Wallet
-Wallet points = 
-= @wallet.points
+Wallet points =
+= @wallet.id
 %h1 Wallet Histories
 %table{:align => "center", :border => "10"}
   %th Points
@@ -21,4 +21,4 @@ Wallet points =
         = history.created_at.strftime("%I : %M %p")
       %td
         = history.created_at.strftime("%a , %d %b %y")
-%tr
+    %tr
