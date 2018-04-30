@@ -1,0 +1,2 @@
+class WalletHistory < ApplicationRecord
+end
