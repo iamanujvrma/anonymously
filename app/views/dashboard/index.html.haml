@@ -1,20 +1,88 @@
-%h1 Dashboard#index
-%p Find me in app/views/dashboard/index.html.haml
-%body
-  %footer
-  %h3.extra-margin-top Invite Users
-  = form_for(User.new, url: user_invitation_path, html: {class: 'form-inline'}) do |f|
-    = f.text_field :email, placeholder: 'Email',label:false
-    = f.submit 'Invite User'
-  =link_to "Create Message", new_message_path(current_user)
+/ %h1 Dashboard#index
+/%p Find me in app/views/dashboard/index.html.haml
+/%body
+/  %footer
+/  %h3.extra-margin-top Invite Users
+/  = form_for(User.new, url: user_invitation_path, html: {class: 'form-inline'}) do |f|
+/    = f.text_field :email, placeholder: 'Email',label:false
+/    = f.submit 'Invite User'
+/  =link_to "Create Message", new_message_path(current_user)
 
-  %table
-    %tr
-      %th content
-    - @messages.each do |message|
-      %tr
-        %td=message.content
-        %td=link_to "like", like_message_path(message) if message.is_liked == 0
-        %td=" liked " if message.is_liked == 1
-        %td=link_to "unlock", unlock_message_path(message) if message.is_unlocked == 0
-        %td=User.find(message.sender_id).email if message.is_unlocked == 1
+ / %table
+ /   %tr
+ /     %th content
+ /  - @messages.each do |message|
+ /     %tr
+ /      %td=message.content
+ /       %td=link_to "like", like_message_path(message) if message.is_liked == 0
+ /       %td=" liked " if message.is_liked == 1
+ /       %td=link_to "unlock", unlock_message_path(message) if message.is_unlocked == 0
+ /       %td=User.find(message.sender_id).email if message.is_unlocked == 1
+
+ %body
+  %footer
+  .container
+    %div.row
+      %div.col-md-2.mr-5.border-right
+        %div.row.mt-3
+          %button.btn.btn-primary{ "data-toggle" => "modal", "data-target" => "#invite_user" }
+            invite friends
+        %div.row.mt-3
+          %button.btn.btn-primary{ "data-toggle" => "modal", "data-target" => "#exampleModal" }
+            Create Message
+          /=link_to "Create Message", new_message_path(current_user), class: "btn btn-secondary" 
+      %div.col-md-8
+        %div.row
+          %h2 Received Messages
+        - @messages.each do |message|
+          %div.row.border.border-rounded.border-secondary.mt-3.bg.bg-light
+            %div.col-md-8
+              =message.content
+            %div.col-md-2
+              =link_to "like", like_message_path(message), class: "btn btn-primary" if message.is_liked == 0
+              =" liked " if message.is_liked == 1
+            %div.col-md-2
+              =link_to "unlock", unlock_message_path(message), class: "btn btn-sm btn-primary" if message.is_unlocked == 0
+              =User.find(message.sender_id).email if message.is_unlocked == 1
+
+#invite_user.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "invite_user_Label", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#invite_user_Label.modal-title Invite Friend
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      = form_for(User.new, url: user_invitation_path, html: {class: 'form-inline'}) do |form|
+        .modal-body
+          %div.row.mt-2.bg.bg-light
+            %div.col-md-4         
+              =form.label 'Email'
+            %div.col-md-8
+              =form.text_field 'email', :required => "required"
+        .modal-footer
+          =form.submit 'Invite'
+
+#exampleModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#exampleModalLabel.modal-title New message
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      =form_for(Message.new, url: messages_path(current_user), method: :post, html: {class: 'form-inline'}) do |form|
+        .modal-body
+          %div.row.mt-2.bg.bg-light
+            %div.col-md-4         
+              =form.label 'Send to '
+            %div.col-md-8
+              =form.text_field 'receiver_id', :required => "required"
+              /=@message.errors.full_messages_for(:receiver_id) if @message.errors.messages[:receiver_id]
+          %div.row.mt-2.bg.bg-light
+            %div.col-md-4
+              =form.label'content'
+            %div.col-md-8
+              =form.text_field 'content', :required => "required"
+              /=@message.errors.full_messages_for(:content) if @message.errors.messages[:content]
+        .modal-footer
+          =form.submit 'SEND'
+ 
