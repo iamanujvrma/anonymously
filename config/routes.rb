@@ -14,5 +14,8 @@ Rails.application.routes.draw do
       get :like
     end
   end
+
+  resources :wallet
+  resources :wallet_histories
   
 end
