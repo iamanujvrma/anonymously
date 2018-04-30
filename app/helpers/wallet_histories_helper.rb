@@ -1,0 +1,2 @@
+module WalletHistoriesHelper
+end

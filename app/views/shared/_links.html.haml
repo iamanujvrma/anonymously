@@ -1,35 +1,23 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark 
-  %a.navbar-brand{:href => "#"} Anonymously
-  %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", :type => "button"}
-    %span.navbar-toggler-icon
-  #navbarSupportedContent.collapse.navbar-collapse
-    %ul.navbar-nav.ml-auto
-      - if user_signed_in?
-        %li.nav-item
-          %a.nav-link Hi, #{current_user.name}!!!
-          - if current_user.avatar.present?
-            = image_tag(current_user.avatar.thumb.url)
-      %li.nav-item.active
-      %a.nav-link{:href => root_path}
-        Home
-        %span.sr-only (current)
-      - if user_signed_in?
-        %li.nav-item
-          %a.nav-link{ :href => dashboard_index_path } DashBoard
-      - if user_signed_in?
-        %li.nav-item
-          %a.nav-link{ :href => edit_user_registration_path } Edit Profile
-      - else
-        %li.nav-item
-          %a.nav-link{ :href => new_user_registration_path } Register
-      - if user_signed_in?
-        %li.nav-item
-          %a.nav-link{ :href => destroy_user_session_path, method: :delete } Logout
-      - else
-        %li.nav-item
-          %a.nav-link{ :href => new_user_session_path } Login
-      
-
-
-
-
+- if user_signed_in?
+  %li
+    = "Hi, #{current_user.name}!!!"
+    - if current_user.avatar.present?
+      = image_tag(current_user.avatar.thumb.url)
+- if user_signed_in?
+  %li
+    = link_to('DashBoard', dashboard_index_path)
+- if user_signed_in?
+  %li
+    = link_to('Logout', destroy_user_session_path, method: :delete)
+- else
+  %li
+    = link_to('Login', new_user_session_path)
+- if user_signed_in?
+  %li
+    = link_to('Edit registration', edit_user_registration_path)
+- else
+  %li
+    = link_to('Register', new_user_registration_path)
+- if user_signed_in?
+  %li
+= link_to('Wallet', current_user.wallet)
