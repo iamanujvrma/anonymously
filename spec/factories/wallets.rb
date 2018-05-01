@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :wallet do
-    points 1
+    points 50
+    association :user, factory: :user
   end
 end

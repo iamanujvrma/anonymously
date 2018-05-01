@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :wallet_history do
-    transaction_type "MyString"
-    recepient_name "MyString"
-    points 1
-    wallet_id 1
+    points 10
+    recepient_name 'Raj'
+    transaction_type 'Referral'
+    association :wallet, factory: :wallet
   end
 end
