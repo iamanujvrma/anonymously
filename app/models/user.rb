@@ -19,7 +19,7 @@ class User < ApplicationRecord
 
   validates :date_of_birth, presence: true
   validate :valid_dob?
-  has_one :wallet 
+  has_one :wallet , dependent: :destroy
   after_create :init_wallet
   
   def init_wallet
