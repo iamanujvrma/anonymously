@@ -67,16 +67,18 @@ ActiveRecord::Schema.define(version: 20180317062650) do
     t.string "transaction_type"
     t.string "recepient_name"
     t.integer "points"
+    t.integer "wallet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "wallet_id"
+    t.index ["wallet_id"], name: "index_wallet_histories_on_wallet_id"
   end
 
   create_table "wallets", force: :cascade do |t|
-    t.integer "points"
+    t.integer "points", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
 end
