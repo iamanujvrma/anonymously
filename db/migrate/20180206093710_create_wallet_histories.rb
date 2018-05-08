@@ -7,6 +7,8 @@ class CreateWalletHistories < ActiveRecord::Migration[5.1]
       t.string  :transaction_type
       t.string  :recepient_name
       t.integer :points
+      t.references :wallet 
+
       t.timestamps
     end
   end
