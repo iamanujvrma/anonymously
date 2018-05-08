@@ -8,10 +8,8 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    %header
-      = render 'shared/header'
-    %p.notice= notice
-    %p.alert= alert
+    = render 'shared/links'
+    = render 'layouts/custom_error'
     = yield
     %footer.container-fluid.text-center
       %p © A2B1P3R1T1

@@ -9,7 +9,10 @@
           %a.nav-link Hi, #{current_user.name}!!!
           - if current_user.avatar.present?
             %li.nav-item
-            = image_tag(current_user.avatar.thumb.url)
+              = image_tag(current_user.avatar.thumb.url)
+          - else
+            %li.nav-item
+              = image_tag(current_user.avatar.default_url)
       %li.nav-item.active
       %a.nav-link{:href => root_path}
         Home
@@ -17,6 +20,9 @@
       - if user_signed_in?
         %li.nav-item
           %a.nav-link{ :href => dashboard_index_path } DashBoard
+      - if user_signed_in?
+        %li.nav-item
+          %a.nav-link{ :href => users_index_path } Profile
       - if user_signed_in?
         %li.nav-item
           %a.nav-link{ :href => edit_user_registration_path } Edit Profile
