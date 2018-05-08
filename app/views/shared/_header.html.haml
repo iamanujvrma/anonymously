@@ -19,6 +19,9 @@
           %a.nav-link{ :href => dashboard_index_path } DashBoard
       - if user_signed_in?
         %li.nav-item
+          %a.nav-link{ :href => wallet_path( current_user.id ) } Wallet
+      - if user_signed_in?
+        %li.nav-item
           %a.nav-link{ :href => edit_user_registration_path } Edit Profile
       - else
         %li.nav-item
@@ -29,8 +32,3 @@
       - else
         %li.nav-item
           %a.nav-link{ :href => new_user_session_path } Login
-      
-
-
-
-
